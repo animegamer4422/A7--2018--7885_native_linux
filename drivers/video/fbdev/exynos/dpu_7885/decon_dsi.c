@@ -364,6 +364,10 @@ static int decon_vsync_thread(void *data)
 			!ktime_equal(timestamp, decon->vsync.timestamp) &&
 			decon->vsync.active);
 
+		struct decon_mode_info psr;
+		decon_to_psr_info(decon, &psr);
+		decon_reg_start(decon->id, &psr);
+
 		if (!ret)
 			sysfs_notify(&decon->dev->kobj, NULL, "vsync");
 	}
@@ -693,7 +697,7 @@ int decon_pan_display(struct fb_var_screeninfo *var, struct fb_info *info)
 		break;
 	case 24:
 	case 32:
-		config.format = DECON_PIXEL_FORMAT_ABGR_8888;
+		config.format = DECON_PIXEL_FORMAT_ARGB_8888;
 		shift = 4;
 		break;
 	default:
