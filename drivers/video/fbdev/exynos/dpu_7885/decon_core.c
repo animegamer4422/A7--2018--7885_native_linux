@@ -706,11 +706,15 @@ err:
 	return ret;
 }
 
+int decon_set_vsync_int(struct fb_info *info, bool active);
+extern int needs_pan;
+
 static int decon_blank(int blank_mode, struct fb_info *info)
 {
 	struct decon_win *win = info->par;
 	struct decon_device *decon = win->decon;
 	int ret = 0;
+	struct fb_info *fb_info;
 
 	decon_info("%s + blank_mode: %d, decon-%d %s mode: %dtype (0: DSI, 1: eDP, 2:DP, 3: WB)\n",
 			__func__, blank_mode,
@@ -750,6 +754,9 @@ static int decon_blank(int blank_mode, struct fb_info *info)
 #ifdef CONFIG_STATE_NOTIFIER
 		state_resume();
 #endif
+		needs_pan = true;
+		fb_info = decon->win[decon->dt.dft_win]->fbinfo;
+		decon_set_vsync_int(fb_info, true);
 		break;
 	case FB_BLANK_VSYNC_SUSPEND:
 	case FB_BLANK_HSYNC_SUSPEND:
