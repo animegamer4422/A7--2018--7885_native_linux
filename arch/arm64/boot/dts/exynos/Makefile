@@ -14,6 +14,9 @@ dtb-y := \
 	exynos7885-jackpotlte_can_open_05.dtb \
 	exynos7885-jackpotlte_can_open_06.dtb \
 	exynos7885-jackpotlte_can_open_07.dtb \
+	exynos7885-a7y18lte_eur_open_00.dtb \
+	exynos7885-a7y18lte_eur_open_01.dtb \
+	exynos7885-a7y18lte_eur_open_03.dtb \
 	exynos7904-m20lte_swa_open_04.dtb \
 	exynos7904-m30lte_swa_open_00.dtb \
 	exynos7904-m30lte_swa_open_01.dtb \
